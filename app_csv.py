@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 st.title(":sunglasses: Analysis Assistant :sunglasses:")
 
@@ -14,5 +15,5 @@ if uploaded_file is not None:
 
     if button:
         st.success("You asked: " + question, icon="🤖")
-        
+
 
