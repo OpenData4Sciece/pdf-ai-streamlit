@@ -1,5 +1,13 @@
+from os import environ as env
+
 import streamlit as st
 import pandas as pd
+
+from langchain.agents import create_pandas_dataframe_agent
+from langchain.llms import OpenAI
+
+env["OPENAI_API_KEY"] = "sk-xxx" # Replace with your API key
+
 
 st.title(":sunglasses: Analysis Assistant :sunglasses:")
 
@@ -15,5 +23,3 @@ if uploaded_file is not None:
 
     if button:
         st.success("You asked: " + question, icon="🤖")
-
-
