@@ -21,5 +21,9 @@ if uploaded_file is not None:
     question = st.text_input("What's your question?")
     button = st.button("Ask :robot_face:")
 
-    if button:
-        st.success("You asked: " + question, icon="🤖")
+    llm = OpenAI(temperature=0) # Create the OpenAI language model
+    agent = create_pandas_dataframe_agent(llm, dataframe, verbose=True)
+
+    if button: # If the user clicks the button
+        answer = agent.run(question) # Run the agent
+        st.success(answer, icon="🤖")
