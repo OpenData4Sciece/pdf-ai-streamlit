@@ -1,3 +1,13 @@
+###
+# Author: Pierre-Henry Soria <hi@ph7.me>
+
+# This is a Streamlit app that uses a CSV file as a knowledge base.
+# It uses the OpenAI API to answer questions.
+# It is a simple example of how to use the LangChain library.
+# To run it, type in your terminal:
+# streamlit run app_csv.py
+###
+
 from os import environ as env
 
 import streamlit as st

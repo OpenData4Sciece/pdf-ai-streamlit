@@ -15,6 +15,7 @@ From a command line opened in the project folder, run the following:
 4. Run `app_csv.py` through Streamlit by typing `streamlit run app_csv.py`
 
 
-## Author
+## The author
 
-**[Pierre-Henry Soria](https://ph7.me)**. A super passionate and enthusiastic software engineer! 😊 Also, a true cheese 🧀, dark chocolate, and espresso lover! 💫
+Hi 👋 I'm **[Pierre-Henry Soria](https://ph7.me)**. A super passionate and mission-driven software engineer! 🤠
+I'm also a true cheese 🧀, dark chocolate, and espresso lover! 💫
