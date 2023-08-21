@@ -26,11 +26,11 @@ def handle_chat():
 
     with st.form(key="chat_form", clear_on_submit=True):
         user_input = st.text_input(
-            "Question:",
-            placeholder="Ask queries related to the PDF content",  
+            "Question",
+            placeholder="Queries related to the PDF content",
             key="user_input"
         )
-        submit_button = st.form_submit_button(label="Query")
+        submit_button = st.form_submit_button(label="Ask")
 
     # if we receive a user input and the submit button was pressed
     if submit_button and user_input:
