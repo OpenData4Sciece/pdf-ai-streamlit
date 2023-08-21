@@ -5,6 +5,14 @@ from os import environ as env
 from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.vectorstores import FAISS
+from langchain.chains import ConversationalRetrievalChain
+from langchain.chat_models import ChatOpenAI
+
+# The OpenAI GPT model name to use
+OPENAI_GPT_MODEL_NAME = "gpt3.5-turbo"
+
 # add sidebar with input field
 # allow users to add their own OpenAI API key
 user_api_key = st.sidebar.text_input(
@@ -24,6 +32,10 @@ def handle_chat():
     if "bot" not in st.session_state:
         st.session_state["bot"] = []
 
+    # initialize session state for chat history
+    if "history" not in st.session_state:
+         st.session_state["history"] = []
+
     with st.form(key="chat_form", clear_on_submit=True):
         user_input = st.text_input(
             "Question",
@@ -34,7 +46,16 @@ def handle_chat():
 
     # if we receive a user input and the submit button was pressed
     if submit_button and user_input:
-        answer = "Echo: " + user_input
+        result = chain.answer({
+            "question": user_input,
+            "chat_history": st.session_state["history"],
+        })
+        # get the answer from the result
+        answer = result["answer"]
+
+        # store user input and answer to chat history
+        st.session_state["history"].append(user_input, answer)
+
         # store user and bot messages to session state
         st.session_state["user"].append(user_input)
         st.session_state["bot"].append(answer)
@@ -73,6 +94,18 @@ if user_api_key:
 
         # display the content of the data
         st.write(documents)
+
+        # embed the documents to langchain vector space
+        embeddings = OpenAIEmbeddings()
+        database = FAISS.from_documents(documents, embeddings)
+
+        chain = ConversationalRetrievalChain.from_llm(
+            llm=ChatOpenAI(
+                temperature=0.0,
+                model_name=OPENAI_GPT_MODEL_NAME,
+                retriever=database.as_retriever(),
+            )
+        )
 
 
         # show the query input on the chat conversation
