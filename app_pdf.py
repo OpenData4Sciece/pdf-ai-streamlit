@@ -1,5 +1,16 @@
 import streamlit as st
 from streamlit_chat import message
+from os import environ as env
+
+# add sidebar with input field
+# allow users to add their own OpenAI API key
+user_api_key = st.sidebar.text_input(
+    label = "#### OpenAI API Key 🔒",
+    placeholder="sk-xxx",
+    type="password")
+
+env["OPENAI_API_KEY"] = user_api_key
+
 
 def handle_chat():
     # initialize session state for user and bot messages
@@ -36,4 +47,10 @@ def handle_chat():
                 is_user=True,
                 avatar_style="adventurer") # https://www.dicebear.com/styles/adventurer
 
-handle_chat()
+# if we got the API key, display the file uploader
+if user_api_key:
+    uploaded_file = st.file_uploader("Upload PDF", type=["pdf"])
+
+    # if we receive a CSV file, display the chat conversation
+    if uploaded_file is not None:
+        handle_chat()
