@@ -1,11 +1,15 @@
 # PDF AI Streamlit app
 
-This PDF AI makes any kinds of requests/prompts against a given PDF file. It also uses the [DiceBear Avatar icons](https://www.dicebear.com/styles/adventurer).
+## Overview
+
+This PDF AI makes any kinds of requests/prompts against a given PDF file. It also uses the [DiceBear Avatar icons](https://www.dicebear.com/styles).
+
 
 ## Requirements
 
 * **Python with Pip**
   * For doing so, install [Python3](https://www.python.org/downloads/)
+
 
 ## Setup the project
 
