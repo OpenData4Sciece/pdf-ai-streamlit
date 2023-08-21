@@ -2,7 +2,7 @@
 
 ## Overview
 
-This PDF AI makes any kinds of requests/prompts against a given PDF file. It also uses the [DiceBear Avatar icons](https://www.dicebear.com/styles).
+This PDF AI makes any kinds of requests/prompts against a given PDF file using OpenAI and Langchain. It also uses the [DiceBear Avatar icons](https://www.dicebear.com/styles).
 
 
 ## Requirements

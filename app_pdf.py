@@ -2,12 +2,17 @@ import streamlit as st
 from streamlit_chat import message
 from os import environ as env
 
+from langchain.document_loaders import PyPDFLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
 # add sidebar with input field
 # allow users to add their own OpenAI API key
 user_api_key = st.sidebar.text_input(
     label = "#### OpenAI API Key 🔒",
     placeholder="sk-xxx",
-    type="password")
+    type="password",
+    label_visibility="visible"
+)
 
 env["OPENAI_API_KEY"] = user_api_key
 
@@ -49,8 +54,26 @@ def handle_chat():
 
 # if we got the API key, display the file uploader
 if user_api_key:
-    uploaded_file = st.file_uploader("Upload PDF", type=["pdf"])
+    uploaded_file = st.file_uploader("Upload PDF", type=["pdf"]) # allow only PDF file extensions
 
     # if we receive a CSV file, display the chat conversation
     if uploaded_file is not None:
+        # create and load the PDF
+        loader = PyPDFLoader(uploaded_file)
+
+        # split and convert PDF pages into text chunks
+        pdfPages = loader.load_and_split()
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=500,
+            chunk_overlap=50,
+            length_function=len,
+            add_start_index=True
+        )
+        documents = text_splitter.split_documents(pdfPages)
+
+        # display the content of the data
+        st.write(documents)
+
+
+        # show the query input on the chat conversation
         handle_chat()
