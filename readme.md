@@ -1,4 +1,4 @@
-# PDF AI Streamlit app
+# PDF AI, Streamlit app
 
 ## Overview
 
@@ -19,6 +19,7 @@ From a command line opened in the project folder, run the following:
 2. Then, activate the virtual environment `source venvGPT/bin/activate`
 3. Finally, install the dependencies with Pip3 `pip3 install -r requirements.txt`
 4. Run `app_pdf.py` through Streamlit by typing `streamlit run app_pdf.py`
+5. Enter your [OpenAI API key](https://platform.openai.com/account/api-keys) in the left sidebar field.
 
 
 ## The author
